@@ -3,7 +3,6 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Store, createStore, compose, applyMiddleware} from 'redux';
 import { Provider } from 'react-redux';
-import * as injectTapEventPlugin from 'react-tap-event-plugin';
 
 import createHistory from 'history/createHashHistory';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
