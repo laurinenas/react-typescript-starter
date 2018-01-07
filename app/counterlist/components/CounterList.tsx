@@ -50,7 +50,7 @@ const mapDispatchToProps = {
   addCounter: addCounter,
 };
 
-export default connect<ICounterListStateProps, ICounterListDispatchProps, ICounterListOwnProps >(
+export default connect(
     mapStateToProps,
     mapDispatchToProps,
 )(CounterList);

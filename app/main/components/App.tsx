@@ -19,7 +19,7 @@ export class App extends React.Component<object, object> {
           <MenuBar title='Title'/>
           <Switch>
             <Route exact path={HomePage} component={Home} />
-            <Route exact path={CounterListPage} component={CounterList as React.ComponentClass<RouteComponentProps<any>>} />
+            <Route exact path={CounterListPage} component={CounterList} />
             <Route component={NoMatch}/>
           </Switch>
         </div>
