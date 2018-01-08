@@ -15,11 +15,6 @@ module.exports = (options) => ({
       exclude: /node_modules/,
       loader: 'tslint-loader',
     }, {
-      test: /\.js$/,
-      loader: 'babel-loader',
-      exclude: /node_modules/,
-      query: options.babelQuery,
-    }, {
       test: /\.(ts|tsx)?$/,
       loader: 'awesome-typescript-loader'
     }, {

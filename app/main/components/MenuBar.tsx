@@ -35,12 +35,12 @@ class MenuBar extends React.Component<IMenuBarProps, IMenuBarReactState> {
 
     const MenuItem = (props:{name:string, path:string}):React.ReactElement<MuiMenuItem> => (
       <MuiMenuItem disabled={this.props.location!.pathname === props.path}
-                   onTouchTap={this.handleNavigate(props.path)}>{props.name}</MuiMenuItem>
+        onClick={this.handleNavigate(props.path)}>{props.name}</MuiMenuItem>
     );
 
     return (
       <div>
-        <MuiAppBar onLeftIconButtonTouchTap={this.handleToggle} title={this.props.title} />
+        <MuiAppBar onLeftIconButtonClick={this.handleToggle} title={this.props.title} />
         <MuiDrawer docked={false} width={250} open={this.state.open}
                    onRequestChange={(open) => this.setState({open})}>
           <MenuItem name='Home' path={HomePage}/>
@@ -73,4 +73,4 @@ const mapDispatchToProps = (dispatch:Dispatch<any>):IMenuBarDispatchProps => ({
   },
 });
 
-export default connect<IMenuBarStateProps, IMenuBarDispatchProps, IMenuBarOwnProps>(mapStateToProps, mapDispatchToProps)(MenuBar);
+export default connect(mapStateToProps, mapDispatchToProps)(MenuBar);

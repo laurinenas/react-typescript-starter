@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import Counter from '../components/Counter';
 import {createRenderer, ShallowRenderer} from 'react-test-renderer/shallow';
 
@@ -13,12 +14,9 @@ import {Store} from 'react-redux';
 import {createStore} from 'redux';
 import {rootReducer} from '../../main/Module';
 
-import * as injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
-
 const mountWithContext = (node:any):ReactWrapper<any, any> => mount(node, {
   context: { muiTheme: muiTheme },
-  childContextTypes: { muiTheme: React.PropTypes.object },
+  childContextTypes: { muiTheme: PropTypes.object },
 });
 
 describe('Counter', () => {
@@ -55,11 +53,11 @@ describe('Counter', () => {
     const init = () => {
       counter = mountWithContext(counterElement);
       value = counter.find('[data-t-id="value"]');
-      decrement = counter.find('[data-t-id="decrement"]');
-      increment = counter.find('[data-t-id="increment"]');
+      decrement = counter.find('[data-t-id="decrement"]').find('EnhancedButton');
+      increment = counter.find('[data-t-id="increment"]').find('EnhancedButton');
       hoverArea = counter.find('[data-t-id="hover-area"]');
       getRemove =  () => counter.find('[data-t-id="remove"]');
-    }
+    };
 
     beforeEach(() => {
       init();

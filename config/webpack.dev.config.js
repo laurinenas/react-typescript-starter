@@ -32,10 +32,6 @@ module.exports = require('./webpack.shared.config')({
 
   plugins: plugins,
 
-  babelQuery: {
-    presets: ['react-hmre'],
-  },
-
   devtool: 'cheap-module-eval-source-map',
 
 });

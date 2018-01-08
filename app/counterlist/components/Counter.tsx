@@ -134,7 +134,7 @@ const mapDispatchToProps = {
   onChangeName: changeCounterName,
 };
 
-export default connect<ICounterStateProps, ICounterDispatchProps, ICounterOwnProps>(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(Counter);
