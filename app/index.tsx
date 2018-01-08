@@ -12,6 +12,7 @@ import { IAppState, App, rootReducer } from './main';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import muiTheme from './muiTheme';
+import ErrorBoundary from './main/components/ErrorBoundary';
 
 interface IHotModule {
   hot?: { accept: (path: string, callback: () => void) => void };
@@ -45,12 +46,14 @@ const store: Store<IAppState> = configureStore();
 
 
 ReactDOM.render(
-    <Provider store={store}>
-      <MuiThemeProvider muiTheme={muiTheme}>
-        <ConnectedRouter history={history}>
-          <App/>
-        </ConnectedRouter>
-      </MuiThemeProvider>
-    </Provider>,
+    <ErrorBoundary>
+      <Provider store={store}>
+        <MuiThemeProvider muiTheme={muiTheme}>
+          <ConnectedRouter history={history}>
+            <App/>
+          </ConnectedRouter>
+        </MuiThemeProvider>
+      </Provider>
+    </ErrorBoundary>,
     document.getElementById('app'),
 );
