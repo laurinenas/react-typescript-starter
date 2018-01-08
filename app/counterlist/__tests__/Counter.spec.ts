@@ -54,7 +54,6 @@ describe('Counter', () => {
       counter = mountWithContext(counterElement);
       value = counter.find('[data-t-id="value"]');
       decrement = counter.find('[data-t-id="decrement"]').find('EnhancedButton');
-      console.log(decrement.debug());
       increment = counter.find('[data-t-id="increment"]').find('EnhancedButton');
       hoverArea = counter.find('[data-t-id="hover-area"]');
       getRemove =  () => counter.find('[data-t-id="remove"]');
