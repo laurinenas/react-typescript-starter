@@ -13,17 +13,20 @@ const plugins = [
 ];
 
 module.exports = require('./webpack.shared.config')({
+  srcs: [
+    path.join(process.cwd(), 'app')
+  ],
   debug: true,
-  devtool: 'eval',
   // Add hot reloading in development
   entry: [
-    'webpack-hot-middleware/client',
+    'webpack-dev-server/client?http://0.0.0.0:8080',
+    'webpack/hot/only-dev-server',
     path.join(process.cwd(), 'app/index.tsx'),
   ],
 
   output: {
-    filename: '[name].js',
-    chunkFilename: '[name].chunk.js',
+    filename: 'main.js',
+    path: path.join(process.cwd(), 'build')
   },
 
   resolve: {
@@ -33,6 +36,12 @@ module.exports = require('./webpack.shared.config')({
   plugins: plugins,
 
   devtool: 'cheap-module-eval-source-map',
+
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './build',
+    hot: true,
+  }
 
 });
 

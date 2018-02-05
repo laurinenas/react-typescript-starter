@@ -1,53 +1,30 @@
-
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {Store, createStore, compose, applyMiddleware} from 'redux';
-import { Provider } from 'react-redux';
+import {Store} from 'redux';
+import {Provider} from 'react-redux';
+import {createHashHistory}  from 'history';
+import {ConnectedRouter} from 'react-router-redux';
 
-import createHistory from 'history/createHashHistory';
-import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 
-
-import { IAppState, App, rootReducer } from './main';
+import {App, IAppState} from './main';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import muiTheme from './muiTheme';
 
-interface IHotModule {
-  hot?: { accept: (path: string, callback: () => void) => void };
-}
-
 declare const require: (name: String) => any;
-declare const module: IHotModule;
 
-const history = createHistory();
+const history = createHashHistory();
 
-function configureStore(): Store<IAppState> {
+const store: Store<IAppState> = (process.env.NODE_ENV !== 'production')
+        ? (require('./store.dev') as any).configureStore(history)
+        : (require('./store.prod') as any).configureStore(history);
 
-  const routingMiddleware = routerMiddleware(history);
-  const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  const enhancers = composeEnhancers(applyMiddleware(routingMiddleware));
-
-  const localStore = createStore<IAppState>(rootReducer, enhancers);
-
-  if (module.hot) {
-    module.hot.accept('./main/Module', () => {
-      const nextRootReducer: any = require('./main/Module').rootReducer;
-
-      localStore.replaceReducer(nextRootReducer);
-    });
-  }
-
-  return localStore;
-}
-
-const store: Store<IAppState> = configureStore();
 
 
 ReactDOM.render(
     <Provider store={store}>
       <MuiThemeProvider muiTheme={muiTheme}>
-        <ConnectedRouter history={history}>
+        <ConnectedRouter store={store} history={history}>
           <App/>
         </ConnectedRouter>
       </MuiThemeProvider>
