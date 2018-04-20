@@ -13,6 +13,7 @@ const plugins = [
 ];
 
 module.exports = require('./webpack.shared.config')({
+  mode: 'development',
   srcs: [
     path.join(process.cwd(), 'app')
   ],

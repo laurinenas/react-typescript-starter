@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = require('./webpack.shared.config')({
+  mode: 'production',
   entry: [
     path.join(process.cwd(), 'app/index.tsx'),
   ],
@@ -13,13 +14,6 @@ module.exports = require('./webpack.shared.config')({
   },
 
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      children: true,
-      minChunks: 2,
-      async: true,
-    }),
-
     new HtmlWebpackPlugin({
       template: './index.html',
       minify: {
